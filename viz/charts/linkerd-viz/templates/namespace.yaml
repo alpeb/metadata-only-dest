@@ -1,0 +1,16 @@
+{{- if eq .Release.Service "CLI" -}}
+---
+###
+### Linkerd Viz Extension Namespace
+###
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: {{.Release.Namespace}}
+  labels:
+    linkerd.io/extension: viz
+  annotations:
+    {{- if .Values.prometheusUrl }}
+    viz.linkerd.io/external-prometheus: {{.Values.prometheusUrl}}
+    {{- end }}
+{{ end -}}
